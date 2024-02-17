@@ -19,7 +19,7 @@ public class TaskEntity extends BaseEntity {
     @Column(name = "content")
     private String content;
 
-    @Column(name = "task_priority")//todo add to migration
+    @Column(name = "task_priority")
     private TaskPriority priority;
 
     @ManyToOne

@@ -17,11 +17,11 @@ public class UserEntity extends BaseEntity {
     @Column(name = "lastName")
     private String lastName;
 
-    @Column(name = "gender")// todo add to migration
+    @Column(name = "gender")
     @Enumerated(EnumType.STRING)
     UserGender gender;
 
-    @Column(name = "user_role")// todo add to migration
+    @Column(name = "user_role")
     @Enumerated(EnumType.STRING)
     private UserRoles role;
 
