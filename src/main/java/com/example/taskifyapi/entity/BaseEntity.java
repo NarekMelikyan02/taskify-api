@@ -19,8 +19,7 @@ public abstract class BaseEntity {
     @GeneratedValue(generator = "UUID")
     @UuidGenerator
     protected UUID id;
-
     @Column(name = "created")
-    LocalDateTime created;
+    protected LocalDateTime created;
 
 }
