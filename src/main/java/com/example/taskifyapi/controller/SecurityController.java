@@ -11,17 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class SecurityController {
 
-private final SecurityService userService;
+  private final SecurityService userService;
 
-    public SecurityController(SecurityService userService) {
-        this.userService = userService;
-    }
-    @PostMapping("/register")
-public ResponseEntity<AuthenticationResponse> register(@RequestBody UserEntity request){
-       return ResponseEntity.ok(userService.register(request));
-    }
-    @PostMapping("/login")
-    public  ResponseEntity<AuthenticationResponse> login(@RequestBody UserEntity request){
-        return ResponseEntity.ok(userService.authenticate(request));
-    }
+  public SecurityController(SecurityService userService) {
+    this.userService = userService;
+  }
+
+  @PostMapping("/register")
+  public ResponseEntity<AuthenticationResponse> register(@RequestBody UserEntity request) {
+    return ResponseEntity.ok(userService.register(request));
+  }
+
+  @PostMapping("/login")
+  public ResponseEntity<AuthenticationResponse> login(@RequestBody UserEntity request) {
+    return ResponseEntity.ok(userService.authenticate(request));
+  }
 }
