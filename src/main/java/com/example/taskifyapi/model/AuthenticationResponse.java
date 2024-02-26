@@ -1,13 +1,13 @@
 package com.example.taskifyapi.model;
 
 public class AuthenticationResponse {
-    private final String token;
+  private final String token;
 
-    public AuthenticationResponse(String token) {
-        this.token = token;
-    }
+  public AuthenticationResponse(String token) {
+    this.token = token;
+  }
 
-    public String getToken() {
-        return token;
-    }
+  public String getToken() {
+    return token;
+  }
 }
