@@ -1,6 +1,7 @@
 package com.example.taskifyapi.entity;
 
 import com.example.taskifyapi.entity.enums.TaskPriority;
+import com.example.taskifyapi.entity.enums.TaskStatus;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,6 +20,10 @@ public class TaskEntity extends BaseEntity {
   @Column(name = "task_priority")
   @Enumerated(EnumType.STRING)
   private TaskPriority priority;
+
+  @Column(name = "status", nullable = false)
+  @Enumerated(EnumType.STRING)
+  TaskStatus status;
 
   @ManyToOne
   @JoinColumn(name = "user_id")

@@ -4,6 +4,7 @@ import com.example.taskifyapi.Dto.UserDto;
 import com.example.taskifyapi.entity.UserEntity;
 import com.example.taskifyapi.exeptions.UserNotFoundException;
 import com.example.taskifyapi.repository.UserRepository;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -16,13 +17,15 @@ import org.springframework.stereotype.Service;
 public class AdminService {
 
   private final UserRepository userRepository;
+  private final TaskService taskService;
 
   public void giveAuthorities(final UserEntity request) {
     UserEntity user =
         userRepository
             .findByEmail(request.getEmail())
-            .orElseThrow(() -> new UserNotFoundException("Not such user exists"));
+            .orElseThrow(() -> new UserNotFoundException("User does not exist"));
     user.setRole(request.getRole());
+    user.setUpdated(LocalDateTime.now());
     log.info("User role was set to {}", user.getRole());
     userRepository.save(user);
   }
@@ -39,7 +42,7 @@ public class AdminService {
         .email(user.getEmail())
         .role(user.getRole())
         .gender(user.getGender())
-        .asignedTasks(user.getAsignedTasks())
+        .assignedTasks(user.getAsignedTasks().stream().map(taskService::taskMapper).toList())
         .build();
   }
 

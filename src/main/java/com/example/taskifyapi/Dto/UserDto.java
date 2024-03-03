@@ -1,6 +1,5 @@
 package com.example.taskifyapi.Dto;
 
-import com.example.taskifyapi.entity.TaskEntity;
 import com.example.taskifyapi.entity.enums.UserGender;
 import com.example.taskifyapi.entity.enums.UserRoles;
 import java.util.List;
@@ -15,4 +14,4 @@ public record UserDto(
     String email,
     UserRoles role,
     UserGender gender,
-    List<TaskEntity> asignedTasks) {}
+    List<TaskDto> assignedTasks) {}
