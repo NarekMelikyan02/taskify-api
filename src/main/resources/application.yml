@@ -1,3 +1,4 @@
+
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/taskify-api
@@ -9,4 +10,6 @@ spring:
       ddl-auto: none
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
-
+server:
+  servlet:
+    context-path: /api/v1/taskify
