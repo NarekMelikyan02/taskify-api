@@ -25,6 +25,10 @@ public class TaskEntity extends BaseEntity {
   @Enumerated(EnumType.STRING)
   TaskStatus status;
 
+  public TaskEntity() {
+    this.status = TaskStatus.CREATED;
+  }
+
   @ManyToOne
   @JoinColumn(name = "user_id")
   UserEntity asignedTo;
