@@ -2,12 +2,12 @@ package com.example.taskifyapi.securityconfig.JwtService;
 
 import com.example.taskifyapi.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserDetailsServiceImp
-    implements org.springframework.security.core.userdetails.UserDetailsService {
+public class UserDetailsServiceImp implements UserDetailsService {
   private final UserRepository repository;
 
   public UserDetailsServiceImp(UserRepository userRepository) {
