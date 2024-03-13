@@ -1,6 +1,7 @@
 package com.example.taskifyapi.securityconfig.JwtService;
 
 import com.example.taskifyapi.entity.UserEntity;
+import com.example.taskifyapi.securityconfig.SecurityUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -8,13 +9,20 @@ import io.jsonwebtoken.security.Keys;
 import java.util.Date;
 import java.util.function.Function;
 import javax.crypto.SecretKey;
+
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
+
 public class JwtService {
-  private final String SECRET_KEY =
-      "532e0960c1082ec81fe81d696b26c6cfbd31949661ae911cc57d82ad1069e4ac";
+
+    @Value("${security.secret.key}")
+  private String SECRET_KEY;
 
   public String extractUserName(String token) {
     return extractClaims(token, Claims::getSubject);
@@ -42,7 +50,8 @@ public class JwtService {
     return Jwts.parser().verifyWith(getSignInKey()).build().parseSignedClaims(token).getPayload();
   }
 
-  public String generateToken(UserEntity user) {
+  public String generateToken(SecurityUser user) {
+
     String token =
         Jwts.builder()
             .subject(user.getUsername())

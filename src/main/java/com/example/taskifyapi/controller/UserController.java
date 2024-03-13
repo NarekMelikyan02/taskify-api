@@ -3,10 +3,11 @@ package com.example.taskifyapi.controller;
 import com.example.taskifyapi.entity.UserEntity;
 import com.example.taskifyapi.model.AuthenticationResponse;
 import com.example.taskifyapi.service.UserService;
-import java.util.UUID;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("Users")

@@ -5,14 +5,16 @@ import com.example.taskifyapi.exeptions.UserNotFoundException;
 import com.example.taskifyapi.model.AuthenticationResponse;
 import com.example.taskifyapi.repository.UserRepository;
 import com.example.taskifyapi.securityconfig.JwtService.JwtService;
-import java.time.LocalDateTime;
-import java.util.UUID;
+import com.example.taskifyapi.securityconfig.SecurityUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -34,16 +36,16 @@ public class UserService {
     user.setRole(request.getRole());
     user.setCreated(LocalDateTime.now());
     userRepository.save(user);
-
-    String token = jwtService.generateToken(user);
+    String token = jwtService.generateToken(new SecurityUser(user));
     return new AuthenticationResponse(token);
   }
 
   public AuthenticationResponse authenticate(UserEntity request) {
+      SecurityUser secUser=new SecurityUser(request);
     authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-    UserEntity user = userRepository.findByEmail(request.getUsername()).orElseThrow();
-    String token = jwtService.generateToken(user);
+        new UsernamePasswordAuthenticationToken(secUser.getUsername(), request.getPassword()));
+    UserEntity user = userRepository.findUserEntityByEmail(secUser.getUsername()).orElseThrow();
+    String token = jwtService.generateToken(new SecurityUser(user));
     return new AuthenticationResponse(token);
   }
 

@@ -13,3 +13,6 @@ spring:
 server:
   servlet:
     context-path: /api/v1/taskify
+security:
+  secret:
+    key: 532e0960c1082ec81fe81d696b26c6cfbd31949661ae911cc57d82ad1069e4ac

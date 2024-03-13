@@ -22,7 +22,7 @@ public class AdminService {
   public void giveAuthorities(final UserEntity request) {
     UserEntity user =
         userRepository
-            .findByEmail(request.getEmail())
+            .findUserEntityByEmail(request.getEmail())
             .orElseThrow(() -> new UserNotFoundException("User does not exist"));
     user.setRole(request.getRole());
     user.setUpdated(LocalDateTime.now());

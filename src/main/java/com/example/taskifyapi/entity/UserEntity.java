@@ -15,62 +15,28 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Setter
 @Entity
 @Table(name = "users")
-public class UserEntity extends BaseEntity implements UserDetails {
-  @Column(name = "first_name", nullable = false)
-  private String firstName;
+public class UserEntity extends BaseEntity {
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
-  @Column(name = "last_name", nullable = false)
-  private String lastName;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
-  @Column(name = "gender", nullable = false)
-  @Enumerated(EnumType.STRING)
-  UserGender gender;
+    @Column(name = "gender", nullable = false)
+    @Enumerated(EnumType.STRING)
+    UserGender gender;
 
-  @Column(name = "email", nullable = false, unique = true)
-  private String email;
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
 
-  @Column(name = "password")
-  private String password;
+    @Column(name = "password")
+    private String password;
 
-  @Column(name = "user_role", nullable = false)
-  @Enumerated(EnumType.STRING)
-  private UserRoles role;
+    @Column(name = "user_role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private UserRoles role;
 
-  @OneToMany(mappedBy = "asignedTo")
-  private List<TaskEntity> asignedTasks;
+    @OneToMany(mappedBy = "asignedTo")
+    private List<TaskEntity> asignedTasks;
 
-  @Override
-  public Collection<? extends GrantedAuthority> getAuthorities() {
-    return List.of(new SimpleGrantedAuthority(role.name()));
-  }
-
-  @Override
-  public String getPassword() {
-    return password;
-  }
-
-  @Override
-  public String getUsername() {
-    return email;
-  }
-
-  @Override
-  public boolean isAccountNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isAccountNonLocked() {
-    return true;
-  }
-
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isEnabled() {
-    return true;
-  }
 }
