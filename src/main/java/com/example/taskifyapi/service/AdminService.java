@@ -7,19 +7,20 @@ import com.example.taskifyapi.repository.UserRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
+
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class AdminService {
 
   private final UserRepository userRepository;
   private final TaskService taskService;
 
-  public void giveAuthorities(final UserEntity request) {
+    public void giveAuthorities(final UserEntity request) {
     UserEntity user =
         userRepository
             .findUserEntityByEmail(request.getEmail())
@@ -34,7 +35,7 @@ public class AdminService {
     return userRepository.findAll().stream().map(this::userMapper).toList();
   }
 
-  private UserDto userMapper(final UserEntity user) {
+  public UserDto userMapper(final UserEntity user) {
     return UserDto.builder()
         .Id(user.getId())
         .firstName(user.getFirstName())

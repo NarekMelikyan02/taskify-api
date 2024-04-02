@@ -1,7 +1,6 @@
-package com.example.taskifyapi.securityconfig.JwtService;
+package com.example.taskifyapi.security.JwtService;
 
-import com.example.taskifyapi.entity.UserEntity;
-import com.example.taskifyapi.securityconfig.SecurityUser;
+import com.example.taskifyapi.security.SecurityUser;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
@@ -9,20 +8,13 @@ import io.jsonwebtoken.security.Keys;
 import java.util.Date;
 import java.util.function.Function;
 import javax.crypto.SecretKey;
-
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 @Service
-
 public class JwtService {
 
-    @Value("${security.secret.key}")
-  private String SECRET_KEY;
+  private String SECRET_KEY = " 532e0960c1082ec81fe81d696b26c6cfbd31949661ae911cc57d82ad1069e4ac";
 
   public String extractUserName(String token) {
     return extractClaims(token, Claims::getSubject);
@@ -56,7 +48,7 @@ public class JwtService {
         Jwts.builder()
             .subject(user.getUsername())
             .issuedAt(new Date(System.currentTimeMillis()))
-            .expiration(new Date(System.currentTimeMillis() + 24 * 60 * 60 * 1000))
+            .expiration(new Date(System.currentTimeMillis() + 24 * 60 * 1000))
             .signWith(getSignInKey())
             .compact();
     return token;

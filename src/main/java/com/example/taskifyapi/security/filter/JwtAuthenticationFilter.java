@@ -1,7 +1,7 @@
-package com.example.taskifyapi.securityconfig.filter;
+package com.example.taskifyapi.security.filter;
 
-import com.example.taskifyapi.securityconfig.JwtService.JwtService;
-import com.example.taskifyapi.securityconfig.JwtService.UserDetailsServiceImp;
+import com.example.taskifyapi.security.JwtService.JwtService;
+import com.example.taskifyapi.security.JwtService.UserDetailsServiceImp;
 import jakarta.annotation.Nonnull;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

@@ -4,17 +4,16 @@ import com.example.taskifyapi.entity.UserEntity;
 import com.example.taskifyapi.exeptions.UserNotFoundException;
 import com.example.taskifyapi.model.AuthenticationResponse;
 import com.example.taskifyapi.repository.UserRepository;
-import com.example.taskifyapi.securityconfig.JwtService.JwtService;
-import com.example.taskifyapi.securityconfig.SecurityUser;
+import com.example.taskifyapi.security.JwtService.JwtService;
+import com.example.taskifyapi.security.SecurityUser;
+import java.time.LocalDateTime;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.util.UUID;
 
 @RequiredArgsConstructor
 @Service
@@ -41,7 +40,7 @@ public class UserService {
   }
 
   public AuthenticationResponse authenticate(UserEntity request) {
-      SecurityUser secUser=new SecurityUser(request);
+    SecurityUser secUser = new SecurityUser(request);
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(secUser.getUsername(), request.getPassword()));
     UserEntity user = userRepository.findUserEntityByEmail(secUser.getUsername()).orElseThrow();

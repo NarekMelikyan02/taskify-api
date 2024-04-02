@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -34,10 +35,15 @@ public class TaskService {
     task.setTitle(taskEntity.getTitle());
     task.setContent(taskEntity.getContent());
     task.setPriority(taskEntity.getPriority());
-    task.setStatus(TaskStatus.ASSIGNED);
-    task.setAsignedTo(userRepository.getReferenceById(taskEntity.getAsignedTo().getId()));
     task.setCreated(LocalDateTime.now());
-
+    if (taskEntity.getAsignedTo() != null) {
+      task.setAsignedTo(
+          userRepository
+              .findUserEntityByEmail(taskEntity.getAsignedTo().getEmail())
+              .orElseThrow(() -> new UsernameNotFoundException("")));
+      log.info("Successfully retrieved user by email: {}", taskEntity.getAsignedTo().getEmail());
+      task.setStatus(TaskStatus.ASSIGNED);
+    }
     taskRepository.save(task);
   }
 

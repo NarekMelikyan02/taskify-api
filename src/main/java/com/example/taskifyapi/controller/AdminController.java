@@ -5,14 +5,14 @@ import com.example.taskifyapi.entity.UserEntity;
 import com.example.taskifyapi.service.AdminService;
 import java.util.List;
 import java.util.UUID;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@AllArgsConstructor
 @RestController
-@RequiredArgsConstructor
-@RequestMapping("Admins")
+@RequestMapping(value = "Admins")
 public class AdminController {
   private final AdminService userService;
 

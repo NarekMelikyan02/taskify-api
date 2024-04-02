@@ -23,13 +23,13 @@ public class TaskEntity extends BaseEntity {
 
   @Column(name = "status", nullable = false)
   @Enumerated(EnumType.STRING)
-  TaskStatus status;
-
-  public TaskEntity() {
-    this.status = TaskStatus.CREATED;
-  }
+  private TaskStatus status;
 
   @ManyToOne
   @JoinColumn(name = "user_id")
   UserEntity asignedTo;
+
+  public TaskEntity() {
+    this.status = TaskStatus.CREATED;
+  }
 }
