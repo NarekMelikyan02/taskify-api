@@ -1,6 +1,7 @@
-package com.example.taskifyapi.service;
+package com.example.taskifyapi.service.task;
 
 import com.example.taskifyapi.Dto.TaskDto;
+import com.example.taskifyapi.Dto.requests.TaskRequest;
 import com.example.taskifyapi.entity.TaskEntity;
 import com.example.taskifyapi.entity.enums.TaskStatus;
 import com.example.taskifyapi.repository.TaskRepository;
@@ -14,34 +15,23 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class TaskService {
+public class TaskServiceImpl implements TaskService {
 
   private final TaskRepository taskRepository;
   private final UserRepository userRepository;
 
-  TaskDto taskMapper(final TaskEntity taskEntity) {
-    return TaskDto.builder()
-        .id(taskEntity.getId())
-        .title(taskEntity.getTitle())
-        .content(taskEntity.getContent())
-        .taskPriority(taskEntity.getPriority())
-        .taskStatus(taskEntity.getStatus())
-        .build();
-  }
-
-  public void addTask(final TaskEntity taskEntity) {
+  public TaskDto addTask(TaskRequest request) {
     TaskEntity task = new TaskEntity();
-    task.setTitle(taskEntity.getTitle());
-    task.setContent(taskEntity.getContent());
-    task.setPriority(taskEntity.getPriority());
-    task.setStatus(TaskStatus.ASSIGNED);
-    task.setAsignedTo(userRepository.getReferenceById(taskEntity.getAsignedTo().getId()));
+    task.setTitle(request.title());
+    task.setContent(request.content());
+    task.setPriority(request.priority());
     task.setCreated(LocalDateTime.now());
-
-    taskRepository.save(task);
+    task.setStatus(TaskStatus.CREATED);
+    task = taskRepository.save(task);
+    return TaskMapper.map(task);
   }
 
-  public void deleteById(UUID id) {
+  public void deleteById(final UUID id) {
     if (taskRepository.findById(id).isPresent()) taskRepository.deleteById(id);
     else log.error("Task with id: {} doesn't exist", id);
   }

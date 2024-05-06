@@ -1,13 +1,14 @@
-package com.example.taskifyapi.securityconfig.filter;
+package com.example.taskifyapi.security.filter;
 
-import com.example.taskifyapi.securityconfig.JwtService.JwtService;
-import com.example.taskifyapi.securityconfig.JwtService.UserDetailsServiceImp;
+import com.example.taskifyapi.security.JwtService.JwtService;
+import com.example.taskifyapi.security.JwtService.UserDetailsServiceImp;
 import jakarta.annotation.Nonnull;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import lombok.AllArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,15 +17,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Component
+@AllArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   private final JwtService jwtService;
   private final UserDetailsServiceImp userDetailsService;
-
-  public JwtAuthenticationFilter(JwtService jwtService, UserDetailsServiceImp userDetailsService) {
-    this.jwtService = jwtService;
-    this.userDetailsService = userDetailsService;
-  }
 
   @Override
   protected void doFilterInternal(
