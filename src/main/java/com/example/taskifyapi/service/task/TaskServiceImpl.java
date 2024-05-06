@@ -4,6 +4,7 @@ import com.example.taskifyapi.Dto.TaskDto;
 import com.example.taskifyapi.Dto.requests.TaskRequest;
 import com.example.taskifyapi.entity.TaskEntity;
 import com.example.taskifyapi.entity.enums.TaskStatus;
+import com.example.taskifyapi.exeptions.TaskNotFoundException;
 import com.example.taskifyapi.repository.TaskRepository;
 import com.example.taskifyapi.repository.UserRepository;
 import java.time.LocalDateTime;
@@ -32,7 +33,16 @@ public class TaskServiceImpl implements TaskService {
   }
 
   public void deleteById(final UUID id) {
-    if (taskRepository.findById(id).isPresent()) taskRepository.deleteById(id);
-    else log.error("Task with id: {} doesn't exist", id);
+    TaskEntity task =
+        taskRepository
+            .findByIdAndDeletedIsNull(id)
+            .orElseThrow(
+                () -> {
+                  log.error("Task not found by provided id{} ", id);
+                  return new TaskNotFoundException("Task not found");
+                });
+    task.setDeleted(LocalDateTime.now());
+    task = taskRepository.save(task);
+    log.info("Successfully deleted task {}", task.getId());
   }
 }
