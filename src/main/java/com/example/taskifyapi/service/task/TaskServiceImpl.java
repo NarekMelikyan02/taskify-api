@@ -8,6 +8,7 @@ import com.example.taskifyapi.exeptions.TaskNotFoundException;
 import com.example.taskifyapi.repository.TaskRepository;
 import com.example.taskifyapi.repository.UserRepository;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,4 +46,10 @@ public class TaskServiceImpl implements TaskService {
     task = taskRepository.save(task);
     log.info("Successfully deleted task {}", task.getId());
   }
+
+    @Override
+    public List<TaskDto> getAll() {
+      List<TaskEntity> allTasks = taskRepository.findAllByDeletedIsNull();
+        return allTasks.stream().map(TaskMapper::map).toList();
+    }
 }
