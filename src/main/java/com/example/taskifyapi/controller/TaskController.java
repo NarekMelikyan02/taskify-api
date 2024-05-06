@@ -2,7 +2,7 @@ package com.example.taskifyapi.controller;
 
 import com.example.taskifyapi.Dto.TaskDto;
 import com.example.taskifyapi.Dto.requests.TaskRequest;
-import com.example.taskifyapi.service.task.TaskServiceImpl;
+import com.example.taskifyapi.service.task.TaskService;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class TaskController {
 
-  private final TaskServiceImpl taskService;
+  private final TaskService taskService;
 
   @PostMapping("/create")
   public ResponseEntity<TaskDto> addTask(@RequestBody TaskRequest request) {
