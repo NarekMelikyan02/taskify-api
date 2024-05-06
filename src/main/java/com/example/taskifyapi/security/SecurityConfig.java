@@ -3,7 +3,7 @@ package com.example.taskifyapi.security;
 import com.example.taskifyapi.security.JwtService.UserDetailsServiceImp;
 import com.example.taskifyapi.security.filter.JwtAuthenticationFilter;
 import jakarta.annotation.Nonnull;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -17,7 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -31,7 +31,8 @@ public class SecurityConfig {
     return http.csrf(AbstractHttpConfigurer::disable)
         .authorizeHttpRequests(
             req ->
-                req.requestMatchers("/Users/login/**", "/Users/register/**")
+                req.requestMatchers(
+                        "/Authentication/login/**", "/Authentication/register/**", "/Mar/Jan/**")
                     .permitAll()
                     .anyRequest()
                     .authenticated())

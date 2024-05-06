@@ -17,7 +17,7 @@ public class UserDetailsServiceImp implements UserDetailsService {
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     return userRepository
-        .findUserEntityByEmail(username)
+        .findUserEntityByEmailAndDeletedIsNull(username)
         .map(SecurityUser::new)
         .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
   }

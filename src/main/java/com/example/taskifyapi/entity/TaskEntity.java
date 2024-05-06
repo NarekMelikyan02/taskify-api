@@ -27,7 +27,7 @@ public class TaskEntity extends BaseEntity {
 
   @ManyToOne
   @JoinColumn(name = "user_id")
-  UserEntity asignedTo;
+  UserEntity assignedTo;
 
   public TaskEntity() {
     this.status = TaskStatus.CREATED;

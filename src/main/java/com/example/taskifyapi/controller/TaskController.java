@@ -1,11 +1,11 @@
 package com.example.taskifyapi.controller;
 
-import com.example.taskifyapi.entity.TaskEntity;
-import com.example.taskifyapi.service.TaskService;
+import com.example.taskifyapi.Dto.TaskDto;
+import com.example.taskifyapi.Dto.requests.TaskRequest;
+import com.example.taskifyapi.service.task.TaskServiceImpl;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,17 +14,16 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class TaskController {
 
-  private final TaskService taskService;
+  private final TaskServiceImpl taskService;
 
   @PostMapping("/create")
-  public ResponseEntity<Void> addTask(@RequestBody TaskEntity request) {
-    taskService.addTask(request);
-    return new ResponseEntity<>(HttpStatus.CREATED);
+  public ResponseEntity<TaskDto> addTask(@RequestBody TaskRequest request) {
+    return ResponseEntity.ok(taskService.addTask(request));
   }
 
   @DeleteMapping("/deleteBy/{id}")
-  public ResponseEntity<Void> deleteById(@PathVariable UUID id) {
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void deleteById(@PathVariable UUID id) {
     taskService.deleteById(id);
-    return new ResponseEntity<>(HttpStatusCode.valueOf(204));
   }
 }

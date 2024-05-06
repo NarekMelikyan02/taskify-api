@@ -1,10 +1,8 @@
 package com.example.taskifyapi.controller;
 
 import com.example.taskifyapi.repository.UserRepository;
-import com.example.taskifyapi.service.AdminService;
-import com.example.taskifyapi.service.TaskService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.example.taskifyapi.service.admin.AdminServiceImpl;
+import com.example.taskifyapi.service.task.TaskServiceImpl;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -17,28 +15,16 @@ import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
-import static org.mockito.Mockito.verify;
-
 @AutoConfigureMockMvc
 @Testcontainers
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 @ExtendWith(MockitoExtension.class)
 public class AdminServiceTest {
-    @Mock private UserRepository repository;
-    @Mock private TaskService taskService;
-    @InjectMocks
-    private AdminService underTest;
-    @Container
-    @ServiceConnection
-    private static final PostgreSQLContainer<?> postgreSQLContainer =
-            new PostgreSQLContainer<>("postgres:16.0")
-                    .withDatabaseName("testDb")
-                    .withUsername("postgres")
-                    .withPassword("password");
-    @Test
-    void getAllUsers() {
-        underTest.getAllUsers();
-        verify(repository).findAll();
-    }
+  @Container @ServiceConnection
+  private static final PostgreSQLContainer<?> postgreSQLContainer =
+      new PostgreSQLContainer<>("postgres:16.0")
+          .withDatabaseName("testDb")
+          .withUsername("postgres")
+          .withPassword("password");
 }

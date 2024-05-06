@@ -1,13 +1,11 @@
-package com.example.taskifyapi.service;
+package com.example.taskifyapi.service.security;
 
+import com.example.taskifyapi.Dto.security.AuthenticationResponse;
 import com.example.taskifyapi.entity.UserEntity;
-import com.example.taskifyapi.exeptions.UserNotFoundException;
-import com.example.taskifyapi.model.AuthenticationResponse;
 import com.example.taskifyapi.repository.UserRepository;
 import com.example.taskifyapi.security.JwtService.JwtService;
 import com.example.taskifyapi.security.SecurityUser;
 import java.time.LocalDateTime;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,7 +16,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 @Service
 @Slf4j
-public class UserService {
+public class AuthenticationService {
 
   private final UserRepository userRepository;
   private final PasswordEncoder passwordEncoder;
@@ -43,21 +41,9 @@ public class UserService {
     SecurityUser secUser = new SecurityUser(request);
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(secUser.getUsername(), request.getPassword()));
-    UserEntity user = userRepository.findUserEntityByEmail(secUser.getUsername()).orElseThrow();
+    UserEntity user =
+        userRepository.findUserEntityByEmailAndDeletedIsNull(secUser.getUsername()).orElseThrow();
     String token = jwtService.generateToken(new SecurityUser(user));
     return new AuthenticationResponse(token);
-  }
-
-  public void updateUser(final UserEntity request, final UUID id) {
-    UserEntity user =
-        userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
-    user.setFirstName(request.getFirstName());
-    user.setLastName(request.getLastName());
-    user.setGender(request.getGender());
-    user.setEmail(request.getEmail());
-    user.setPassword(request.getPassword());
-    user.setUpdated(LocalDateTime.now());
-    log.info("Successfully updated user by id: {}", request.getId());
-    userRepository.save(user);
   }
 }

@@ -1,0 +1,10 @@
+version: '3.0'
+services:
+  postgres:
+    container_name: postgres-sql
+    image: postgres:alpine
+    environment:
+       POSTGRES_USER: postgres
+       POSTGRES_PASSWORD: password
+    ports:
+      - "5466:5432"

@@ -37,8 +37,8 @@ public class UserEntity extends BaseEntity {
   @Enumerated(EnumType.STRING)
   private UserRoles role;
 
-  @OneToMany(mappedBy = "asignedTo")
-  private List<TaskEntity> asignedTasks;
+  @OneToMany(mappedBy = "assignedTo")
+  private List<TaskEntity> assignedTasks;
 
   public UserEntity() {
     created = LocalDateTime.now();

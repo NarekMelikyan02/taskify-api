@@ -4,18 +4,16 @@ import com.example.taskifyapi.entity.UserEntity;
 import java.util.Collection;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 @AllArgsConstructor
-@Component
+@NoArgsConstructor
 public class SecurityUser implements UserDetails {
 
   private UserEntity user;
-
-  public SecurityUser() {}
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {

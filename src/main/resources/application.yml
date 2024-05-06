@@ -1,9 +1,9 @@
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/taskify-api
+    url: jdbc:postgresql://localhost:5466/taskify
     username: postgres
-    password: Gagohaso2002
+    password: password
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
