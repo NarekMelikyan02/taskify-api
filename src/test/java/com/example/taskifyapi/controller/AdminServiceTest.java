@@ -1,11 +1,6 @@
 package com.example.taskifyapi.controller;
 
-import com.example.taskifyapi.repository.UserRepository;
-import com.example.taskifyapi.service.admin.AdminServiceImpl;
-import com.example.taskifyapi.service.task.TaskServiceImpl;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
