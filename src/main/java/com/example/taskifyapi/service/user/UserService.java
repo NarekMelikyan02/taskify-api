@@ -1,7 +1,7 @@
 package com.example.taskifyapi.service.user;
 
-import com.example.taskifyapi.dto.UserDto;
-import com.example.taskifyapi.dto.requests.user.UserRequest;
+import com.example.taskifyapi.dto.user.UserDto;
+import com.example.taskifyapi.dto.user.UserRequest;
 import java.util.List;
 import java.util.UUID;
 

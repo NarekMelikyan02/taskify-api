@@ -1,12 +1,13 @@
 package com.example.taskifyapi.service.security;
 
+import com.example.taskifyapi.dto.security.LoginRequest;
+import com.example.taskifyapi.dto.security.RegisterRequest;
 import com.example.taskifyapi.dto.security.AuthenticationResponse;
 import com.example.taskifyapi.entity.UserEntity;
 import com.example.taskifyapi.exeptions.EmailAlreadyExistsException;
 import com.example.taskifyapi.repository.UserEntityRepository;
 import com.example.taskifyapi.security.JwtService.JwtService;
 import com.example.taskifyapi.security.SecurityUser;
-import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +15,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Service
@@ -27,18 +30,18 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
   @Override
   @Transactional
-  public AuthenticationResponse register(UserEntity request) {
-    if (emailExists(request.getEmail())) {
-      log.error("There is account with provided email: {}", request.getEmail());
+  public AuthenticationResponse register(RegisterRequest request) {
+    if (emailExists(request.email())) {
+      log.error("There is account with provided email: {}", request.email());
       throw new EmailAlreadyExistsException("");
     } else {
       UserEntity user = new UserEntity();
-      user.setFirstName(request.getFirstName());
-      user.setLastName(request.getLastName());
-      user.setGender(request.getGender());
-      user.setEmail(request.getEmail());
-      user.setPassword(passwordEncoder.encode(request.getPassword()));
-      user.setRole(request.getRole());
+      user.setFirstName(request.firstName());
+      user.setLastName(request.lastName());
+      user.setGender(request.gender());
+      user.setEmail(request.email());
+      user.setPassword(passwordEncoder.encode(request.password()));
+      user.setRole(request.role());
       user.setCreated(LocalDateTime.now());
       userRepository.save(user);
       String token = jwtService.generateToken(new SecurityUser(user));
@@ -47,13 +50,13 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   }
 
   @Override
-  public AuthenticationResponse authenticate(UserEntity request) {
-    SecurityUser secUser = new SecurityUser(request);
-    authenticationManager.authenticate(
-        new UsernamePasswordAuthenticationToken(secUser.getUsername(), request.getPassword()));
+  public AuthenticationResponse authenticate(LoginRequest request) {
     UserEntity user =
-        userRepository.findUserEntityByEmailAndDeletedIsNull(secUser.getUsername()).orElseThrow();
-    String token = jwtService.generateToken(new SecurityUser(user));
+        userRepository.findUserEntityByEmailAndDeletedIsNull(request.email()).orElseThrow();
+    SecurityUser secUser = new SecurityUser(user);
+    authenticationManager.authenticate(
+        new UsernamePasswordAuthenticationToken(secUser.getUsername(), request.password()));
+    String token = jwtService.generateToken(secUser);
     return new AuthenticationResponse(token);
   }
 

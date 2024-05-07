@@ -1,6 +1,6 @@
 package com.example.taskifyapi.service.user;
 
-import com.example.taskifyapi.dto.UserDto;
+import com.example.taskifyapi.dto.user.UserDto;
 import com.example.taskifyapi.entity.UserEntity;
 import com.example.taskifyapi.service.task.TaskMapper;
 

@@ -1,8 +1,8 @@
 package com.example.taskifyapi.controller;
 
-import com.example.taskifyapi.dto.TaskDto;
-import com.example.taskifyapi.dto.requests.task.TaskRequest;
-import com.example.taskifyapi.dto.requests.task.UpdateRequest;
+import com.example.taskifyapi.dto.task.TaskDto;
+import com.example.taskifyapi.dto.task.TaskRequest;
+import com.example.taskifyapi.dto.task.UpdateRequest;
 import com.example.taskifyapi.service.task.TaskService;
 import java.util.List;
 import java.util.UUID;

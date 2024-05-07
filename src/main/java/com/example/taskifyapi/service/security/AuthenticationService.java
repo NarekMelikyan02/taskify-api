@@ -1,10 +1,11 @@
 package com.example.taskifyapi.service.security;
 
 import com.example.taskifyapi.dto.security.AuthenticationResponse;
-import com.example.taskifyapi.entity.UserEntity;
+import com.example.taskifyapi.dto.security.LoginRequest;
+import com.example.taskifyapi.dto.security.RegisterRequest;
 
 public interface AuthenticationService {
-  AuthenticationResponse register(UserEntity request);
+  AuthenticationResponse register(RegisterRequest request);
 
-  AuthenticationResponse authenticate(UserEntity request);
+  AuthenticationResponse authenticate(LoginRequest request);
 }
