@@ -1,4 +1,4 @@
-package com.example.taskifyapi.Dto.requests.task;
+package com.example.taskifyapi.dto.requests.task;
 
 import com.example.taskifyapi.entity.enums.TaskPriority;
 

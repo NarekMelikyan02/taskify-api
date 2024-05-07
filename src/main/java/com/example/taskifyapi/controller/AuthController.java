@@ -1,6 +1,6 @@
 package com.example.taskifyapi.controller;
 
-import com.example.taskifyapi.Dto.security.AuthenticationResponse;
+import com.example.taskifyapi.dto.security.AuthenticationResponse;
 import com.example.taskifyapi.entity.UserEntity;
 import com.example.taskifyapi.service.security.AuthenticationServiceImpl;
 import lombok.RequiredArgsConstructor;

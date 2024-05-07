@@ -1,4 +1,4 @@
-package com.example.taskifyapi.Dto;
+package com.example.taskifyapi.dto;
 
 import com.example.taskifyapi.entity.enums.UserGender;
 import com.example.taskifyapi.entity.enums.UserRoles;

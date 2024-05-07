@@ -1,11 +1,11 @@
 package com.example.taskifyapi.service.task;
 
-import com.example.taskifyapi.Dto.TaskDto;
-import com.example.taskifyapi.Dto.requests.task.TaskRequest;
-import com.example.taskifyapi.Dto.requests.task.UpdateRequest;
+import com.example.taskifyapi.dto.TaskDto;
+import com.example.taskifyapi.dto.requests.task.TaskRequest;
+import com.example.taskifyapi.dto.requests.task.UpdateRequest;
 import com.example.taskifyapi.entity.TaskEntity;
 import com.example.taskifyapi.exeptions.TaskNotFoundException;
-import com.example.taskifyapi.repository.TaskRepository;
+import com.example.taskifyapi.repository.TaskEntityRepository;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class TaskServiceImpl implements TaskService {
 
-  private final TaskRepository taskRepository;
+  private final TaskEntityRepository taskRepository;
 
   @Override
   @Transactional

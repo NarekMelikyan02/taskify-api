@@ -1,9 +1,9 @@
 package com.example.taskifyapi.service.security;
 
-import com.example.taskifyapi.Dto.security.AuthenticationResponse;
+import com.example.taskifyapi.dto.security.AuthenticationResponse;
 import com.example.taskifyapi.entity.UserEntity;
 import com.example.taskifyapi.exeptions.EmailAlreadyExistsException;
-import com.example.taskifyapi.repository.UserRepository;
+import com.example.taskifyapi.repository.UserEntityRepository;
 import com.example.taskifyapi.security.JwtService.JwtService;
 import com.example.taskifyapi.security.SecurityUser;
 import java.time.LocalDateTime;
@@ -20,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class AuthenticationServiceImpl implements AuthenticationService {
 
-  private final UserRepository userRepository;
+  private final UserEntityRepository userRepository;
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
