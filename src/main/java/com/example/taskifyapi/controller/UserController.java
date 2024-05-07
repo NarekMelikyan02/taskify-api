@@ -1,7 +1,7 @@
 package com.example.taskifyapi.controller;
 
 import com.example.taskifyapi.Dto.UserDto;
-import com.example.taskifyapi.Dto.requests.UserRequest;
+import com.example.taskifyapi.Dto.requests.user.UserRequest;
 import com.example.taskifyapi.service.user.UserService;
 import java.util.List;
 import java.util.UUID;
@@ -29,13 +29,13 @@ public class UserController {
   }
 
   @GetMapping("/getUserBy/{id}")
-  public ResponseEntity<UserDto> getUserById(@PathVariable UUID id) {
+  public ResponseEntity<UserDto> getUserById(@PathVariable(name = "id") UUID id) {
     return ResponseEntity.ok(userService.getById(id));
   }
 
   @DeleteMapping("/deleteUserBy/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteById(@PathVariable UUID id) {
+  public void deleteById(@PathVariable(name = "id") UUID id) {
     userService.deleteById(id);
   }
 }

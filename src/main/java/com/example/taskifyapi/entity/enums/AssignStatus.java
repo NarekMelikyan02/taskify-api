@@ -1,7 +1,6 @@
 package com.example.taskifyapi.entity.enums;
 
-public enum TaskStatus {
+public enum AssignStatus {
   COMPLETED,
-  ASSIGNED,
-  CREATED
+  ASSIGNED
 }

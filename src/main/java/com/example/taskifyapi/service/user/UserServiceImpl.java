@@ -1,7 +1,7 @@
 package com.example.taskifyapi.service.user;
 
 import com.example.taskifyapi.Dto.UserDto;
-import com.example.taskifyapi.Dto.requests.UserRequest;
+import com.example.taskifyapi.Dto.requests.user.UserRequest;
 import com.example.taskifyapi.entity.UserEntity;
 import com.example.taskifyapi.exeptions.UserNotFoundException;
 import com.example.taskifyapi.repository.UserRepository;
@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 @RequiredArgsConstructor
@@ -21,6 +22,7 @@ public class UserServiceImpl implements UserService {
   private final UserRepository userRepository;
 
   @Override
+  @Transactional
   public UserDto updateUser(UserRequest request, final UUID id) {
     UserEntity user =
         userRepository
@@ -52,6 +54,7 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
+  @Transactional
   public void deleteById(final UUID userId) {
     UserEntity user =
         userRepository

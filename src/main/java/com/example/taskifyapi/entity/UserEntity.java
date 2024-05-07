@@ -3,15 +3,10 @@ package com.example.taskifyapi.entity;
 import com.example.taskifyapi.entity.enums.UserGender;
 import com.example.taskifyapi.entity.enums.UserRoles;
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-@Builder
-@AllArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -27,7 +22,7 @@ public class UserEntity extends BaseEntity {
   @Enumerated(EnumType.STRING)
   UserGender gender;
 
-  @Column(name = "email", nullable = false, unique = true)
+  @Column(name = "email", nullable = false)
   private String email;
 
   @Column(name = "password")
@@ -39,8 +34,4 @@ public class UserEntity extends BaseEntity {
 
   @OneToMany(mappedBy = "assignedTo")
   private List<TaskEntity> assignedTasks;
-
-  public UserEntity() {
-    created = LocalDateTime.now();
-  }
 }

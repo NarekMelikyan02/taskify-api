@@ -8,7 +8,7 @@ create table if not exists users
     first_name varchar(50),
     last_name  varchar(50),
     gender     varchar(10)             not null,
-    email      varchar(100)             not null unique,
+    email      varchar(100)             not null,
     password   varchar(100)             not null,
     user_role  varchar(10)             not null
 );
@@ -23,7 +23,7 @@ create table if not exists tasks
     title         varchar(50)             not null,
     content       varchar(255)             not null,
     task_priority varchar(10)             not null ,
-    status        varchar(10)              not null ,
+    status        varchar(10)               ,
     user_id       uuid,
     constraint fk_users foreign key (user_id) references users (id)
 );

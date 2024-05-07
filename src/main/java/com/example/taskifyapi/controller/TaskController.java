@@ -1,9 +1,9 @@
 package com.example.taskifyapi.controller;
 
 import com.example.taskifyapi.Dto.TaskDto;
-import com.example.taskifyapi.Dto.requests.TaskRequest;
+import com.example.taskifyapi.Dto.requests.task.TaskRequest;
+import com.example.taskifyapi.Dto.requests.task.UpdateRequest;
 import com.example.taskifyapi.service.task.TaskService;
-
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -19,8 +19,14 @@ public class TaskController {
   private final TaskService taskService;
 
   @GetMapping("/getAll")
-  ResponseEntity<List<TaskDto>> getAll(){
-      return ResponseEntity.ok(taskService.getAll());
+  ResponseEntity<List<TaskDto>> getAll() {
+    return ResponseEntity.ok(taskService.getAll());
+  }
+
+  @PutMapping("/updateBy/{id}")
+  ResponseEntity<TaskDto> updateById(
+      @PathVariable(name = "id") final UUID id, @RequestBody UpdateRequest request) {
+    return ResponseEntity.ok(taskService.updateTask(id, request));
   }
 
   @PostMapping("/add")
@@ -30,7 +36,7 @@ public class TaskController {
 
   @DeleteMapping("/deleteBy/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void deleteById(@PathVariable UUID id) {
+  public void deleteById(@PathVariable(name = "id") UUID id) {
     taskService.deleteById(id);
   }
 }
