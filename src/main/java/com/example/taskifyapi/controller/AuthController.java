@@ -1,7 +1,8 @@
 package com.example.taskifyapi.controller;
 
-import com.example.taskifyapi.Dto.security.AuthenticationResponse;
-import com.example.taskifyapi.entity.UserEntity;
+import com.example.taskifyapi.dto.security.AuthenticationResponse;
+import com.example.taskifyapi.dto.security.LoginRequest;
+import com.example.taskifyapi.dto.security.RegisterRequest;
 import com.example.taskifyapi.service.security.AuthenticationServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +19,12 @@ public class AuthController {
   private final AuthenticationServiceImpl authService;
 
   @PostMapping("/register")
-  public ResponseEntity<AuthenticationResponse> register(@RequestBody UserEntity request) {
+  public ResponseEntity<AuthenticationResponse> register(@RequestBody RegisterRequest request) {
     return ResponseEntity.ok(authService.register(request));
   }
 
   @PostMapping("/login")
-  public ResponseEntity<AuthenticationResponse> login(@RequestBody UserEntity request) {
+  public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest request) {
     return ResponseEntity.ok(authService.authenticate(request));
   }
 }

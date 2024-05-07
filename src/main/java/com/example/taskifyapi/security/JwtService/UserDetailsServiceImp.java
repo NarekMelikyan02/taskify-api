@@ -1,6 +1,6 @@
 package com.example.taskifyapi.security.JwtService;
 
-import com.example.taskifyapi.repository.UserRepository;
+import com.example.taskifyapi.repository.UserEntityRepository;
 import com.example.taskifyapi.security.SecurityUser;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDetailsServiceImp implements UserDetailsService {
 
-  private final UserRepository userRepository;
+  private final UserEntityRepository userRepository;
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

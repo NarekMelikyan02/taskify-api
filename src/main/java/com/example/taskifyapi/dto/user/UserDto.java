@@ -1,5 +1,6 @@
-package com.example.taskifyapi.Dto;
+package com.example.taskifyapi.dto.user;
 
+import com.example.taskifyapi.dto.task.TaskDto;
 import com.example.taskifyapi.entity.enums.UserGender;
 import com.example.taskifyapi.entity.enums.UserRoles;
 import java.util.List;

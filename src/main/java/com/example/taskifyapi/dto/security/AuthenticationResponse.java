@@ -1,3 +1,3 @@
-package com.example.taskifyapi.Dto.security;
+package com.example.taskifyapi.dto.security;
 
 public record AuthenticationResponse(String token) {}
