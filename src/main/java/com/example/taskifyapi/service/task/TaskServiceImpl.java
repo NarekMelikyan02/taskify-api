@@ -75,4 +75,17 @@ public class TaskServiceImpl implements TaskService {
     log.info("Successfully updated task{} ", task.getId());
     return TaskMapper.map(task);
   }
+
+  @Override
+  public TaskDto getByID(final UUID id) {
+    TaskEntity task =
+        taskRepository
+            .findByIdAndDeletedIsNull(id)
+            .orElseThrow(
+                () -> {
+                  log.error("Can't find task {}", id);
+                  return new TaskNotFoundException("");
+                });
+    return TaskMapper.map(task);
+  }
 }

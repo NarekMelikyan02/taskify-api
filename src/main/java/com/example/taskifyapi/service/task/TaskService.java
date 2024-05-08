@@ -14,4 +14,6 @@ public interface TaskService {
   List<TaskDto> getAll();
 
   TaskDto updateTask(UUID id, UpdateRequest request);
+
+  TaskDto getByID(UUID id);
 }

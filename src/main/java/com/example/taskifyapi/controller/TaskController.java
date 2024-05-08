@@ -18,6 +18,11 @@ public class TaskController {
 
   private final TaskService taskService;
 
+  @GetMapping("getBy/{id}")
+  ResponseEntity<TaskDto> getById(@PathVariable(name = "id") final UUID id) {
+    return ResponseEntity.ok(taskService.getByID(id));
+  }
+
   @GetMapping("/getAll")
   ResponseEntity<List<TaskDto>> getAll() {
     return ResponseEntity.ok(taskService.getAll());
