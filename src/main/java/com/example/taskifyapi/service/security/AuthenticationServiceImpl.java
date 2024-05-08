@@ -1,13 +1,14 @@
 package com.example.taskifyapi.service.security;
 
+import com.example.taskifyapi.dto.security.AuthenticationResponse;
 import com.example.taskifyapi.dto.security.LoginRequest;
 import com.example.taskifyapi.dto.security.RegisterRequest;
-import com.example.taskifyapi.dto.security.AuthenticationResponse;
 import com.example.taskifyapi.entity.UserEntity;
 import com.example.taskifyapi.exeptions.EmailAlreadyExistsException;
 import com.example.taskifyapi.repository.UserEntityRepository;
 import com.example.taskifyapi.security.JwtService.JwtService;
 import com.example.taskifyapi.security.SecurityUser;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,8 +16,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @Service

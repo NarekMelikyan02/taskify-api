@@ -28,7 +28,7 @@ public class UserController {
     return ResponseEntity.ok(userService.updateUser(request, id));
   }
 
-  @GetMapping("/getUserBy/{id}")
+  @GetMapping("/getBy/{id}")
   public ResponseEntity<UserDto> getUserById(@PathVariable(name = "id") UUID id) {
     return ResponseEntity.ok(userService.getById(id));
   }
