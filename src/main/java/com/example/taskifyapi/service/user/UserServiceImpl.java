@@ -58,7 +58,7 @@ public class UserServiceImpl implements UserService {
   public void deleteById(final UUID userId) {
     UserEntity user =
         userRepository
-            .getUserEntityByIdAndDeletedIsNull(userId)
+            .findByIdAndDeletedIsNull(userId)
             .orElseThrow(() -> new UserNotFoundException(""));
     user.setAssignedTasks(null);
     user.setDeleted(LocalDateTime.now());

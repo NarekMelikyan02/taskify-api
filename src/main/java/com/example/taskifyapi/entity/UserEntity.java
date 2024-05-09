@@ -1,7 +1,7 @@
 package com.example.taskifyapi.entity;
 
-import com.example.taskifyapi.entity.enums.UserGender;
-import com.example.taskifyapi.entity.enums.UserRoles;
+import com.example.taskifyapi.enumeration.UserGender;
+import com.example.taskifyapi.enumeration.UserRoles;
 import jakarta.persistence.*;
 import java.util.List;
 import lombok.Getter;

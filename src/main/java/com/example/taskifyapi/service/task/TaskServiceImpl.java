@@ -4,13 +4,16 @@ import com.example.taskifyapi.dto.task.TaskDto;
 import com.example.taskifyapi.dto.task.TaskRequest;
 import com.example.taskifyapi.dto.task.UpdateRequest;
 import com.example.taskifyapi.entity.TaskEntity;
+import com.example.taskifyapi.enumeration.AssignStatus;
 import com.example.taskifyapi.exeptions.TaskNotFoundException;
 import com.example.taskifyapi.repository.TaskEntityRepository;
+import com.example.taskifyapi.service.event.model.TaskAssignedEvent;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,6 +23,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TaskServiceImpl implements TaskService {
 
   private final TaskEntityRepository taskRepository;
+  private final ApplicationEventPublisher eventPublisher;
 
   @Override
   @Transactional
@@ -29,7 +33,11 @@ public class TaskServiceImpl implements TaskService {
     task.setContent(request.content());
     task.setPriority(request.priority());
     task.setCreated(LocalDateTime.now());
+    task.setStatus(AssignStatus.ASSIGNED);
     task = taskRepository.save(task);
+    log.info("preparing to send event");
+    eventPublisher.publishEvent(
+        TaskAssignedEvent.builder().taskId(task.getId()).userEmail(request.userEmail()).build());
     return TaskMapper.map(task);
   }
 

@@ -1,7 +1,7 @@
 package com.example.taskifyapi.dto.security;
 
-import com.example.taskifyapi.entity.enums.UserGender;
-import com.example.taskifyapi.entity.enums.UserRoles;
+import com.example.taskifyapi.enumeration.UserGender;
+import com.example.taskifyapi.enumeration.UserRoles;
 
 public record RegisterRequest(
     String firstName,

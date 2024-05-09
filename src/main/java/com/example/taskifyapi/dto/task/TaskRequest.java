@@ -1,5 +1,5 @@
 package com.example.taskifyapi.dto.task;
 
-import com.example.taskifyapi.entity.enums.TaskPriority;
+import com.example.taskifyapi.enumeration.TaskPriority;
 
-public record TaskRequest(String title, String content, TaskPriority priority) {}
+public record TaskRequest(String title, String content, TaskPriority priority, String userEmail) {}

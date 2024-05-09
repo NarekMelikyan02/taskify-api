@@ -11,7 +11,5 @@ public interface UserEntityRepository extends JpaRepository<UserEntity, UUID> {
 
   List<UserEntity> getAllByDeletedIsNull();
 
-  Optional<UserEntity> getUserEntityByIdAndDeletedIsNull(UUID id);
-
   Optional<UserEntity> findUserEntityByEmailAndDeletedIsNull(String email);
 }
