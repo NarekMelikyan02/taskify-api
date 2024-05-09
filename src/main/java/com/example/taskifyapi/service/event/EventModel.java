@@ -1,3 +1,4 @@
 package com.example.taskifyapi.service.event;
-//marker interface
+
+// marker interface
 public interface EventModel {}
