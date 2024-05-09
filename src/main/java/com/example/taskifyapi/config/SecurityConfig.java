@@ -1,7 +1,7 @@
-package com.example.taskifyapi.security;
+package com.example.taskifyapi.config;
 
-import com.example.taskifyapi.security.JwtService.UserDetailsServiceImp;
-import com.example.taskifyapi.security.filter.JwtAuthenticationFilter;
+import com.example.taskifyapi.service.security.JwtService.UserDetailsServiceImp;
+import com.example.taskifyapi.service.security.filter.JwtAuthenticationFilter;
 import jakarta.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;

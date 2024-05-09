@@ -6,11 +6,9 @@ import com.example.taskifyapi.dto.security.RegisterRequest;
 import com.example.taskifyapi.entity.UserEntity;
 import com.example.taskifyapi.exeptions.EmailAlreadyExistsException;
 import com.example.taskifyapi.repository.UserEntityRepository;
-import com.example.taskifyapi.security.JwtService.JwtService;
-import com.example.taskifyapi.security.SecurityUser;
-import java.time.LocalDateTime;
-
+import com.example.taskifyapi.service.security.JwtService.JwtService;
 import com.example.taskifyapi.service.user.UserFetcher;
+import java.time.LocalDateTime;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;

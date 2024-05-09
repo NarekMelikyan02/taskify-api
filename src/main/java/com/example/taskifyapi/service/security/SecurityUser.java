@@ -1,4 +1,4 @@
-package com.example.taskifyapi.security;
+package com.example.taskifyapi.service.security;
 
 import com.example.taskifyapi.entity.UserEntity;
 import java.util.Collection;

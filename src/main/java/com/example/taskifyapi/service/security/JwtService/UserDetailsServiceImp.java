@@ -1,7 +1,7 @@
-package com.example.taskifyapi.security.JwtService;
+package com.example.taskifyapi.service.security.JwtService;
 
 import com.example.taskifyapi.repository.UserEntityRepository;
-import com.example.taskifyapi.security.SecurityUser;
+import com.example.taskifyapi.service.security.SecurityUser;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
