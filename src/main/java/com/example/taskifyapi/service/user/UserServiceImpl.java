@@ -20,14 +20,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserServiceImpl implements UserService {
   private final PasswordEncoder encoder;
   private final UserEntityRepository userRepository;
+  private final UserFetcher userFetcher;
 
   @Override
   @Transactional
   public UserDto updateUser(UserRequest request, final UUID id) {
-    UserEntity user =
-        userRepository
-            .findByIdAndDeletedIsNull(id)
-            .orElseThrow(() -> new UserNotFoundException("User not found"));
+    UserEntity user = userFetcher.fetch(id);
     user.setFirstName(request.firstName());
     user.setLastName(request.lastName());
     user.setGender(request.gender());
@@ -46,20 +44,14 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserDto getById(UUID id) {
-    UserEntity user =
-        userRepository
-            .findByIdAndDeletedIsNull(id)
-            .orElseThrow(() -> new UserNotFoundException("No user by provided id " + id));
+    UserEntity user = userFetcher.fetch(id);
     return UserMapper.map(user);
   }
 
   @Override
   @Transactional
   public void deleteById(final UUID userId) {
-    UserEntity user =
-        userRepository
-            .findByIdAndDeletedIsNull(userId)
-            .orElseThrow(() -> new UserNotFoundException(""));
+    UserEntity user = userFetcher.fetch(userId);
     user.setAssignedTasks(null);
     user.setDeleted(LocalDateTime.now());
     userRepository.save(user);

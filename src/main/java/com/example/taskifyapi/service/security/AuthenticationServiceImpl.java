@@ -9,6 +9,8 @@ import com.example.taskifyapi.repository.UserEntityRepository;
 import com.example.taskifyapi.security.JwtService.JwtService;
 import com.example.taskifyapi.security.SecurityUser;
 import java.time.LocalDateTime;
+
+import com.example.taskifyapi.service.user.UserFetcher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -26,6 +28,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
+  private final UserFetcher userFetcher;
 
   @Override
   @Transactional
@@ -50,8 +53,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
   @Override
   public AuthenticationResponse authenticate(LoginRequest request) {
-    UserEntity user =
-        userRepository.findUserEntityByEmailAndDeletedIsNull(request.email()).orElseThrow();
+    UserEntity user = userFetcher.fetch(request.email());
     SecurityUser secUser = new SecurityUser(user);
     authenticationManager.authenticate(
         new UsernamePasswordAuthenticationToken(secUser.getUsername(), request.password()));
