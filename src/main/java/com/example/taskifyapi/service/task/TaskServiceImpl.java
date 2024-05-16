@@ -8,6 +8,7 @@ import com.example.taskifyapi.enumeration.AssignStatus;
 import com.example.taskifyapi.exeptions.TaskNotFoundException;
 import com.example.taskifyapi.repository.TaskEntityRepository;
 import com.example.taskifyapi.service.event.model.TaskAssignedEvent;
+import com.example.taskifyapi.service.security.AuthFacade;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -24,6 +25,7 @@ public class TaskServiceImpl implements TaskService {
 
   private final TaskEntityRepository taskRepository;
   private final ApplicationEventPublisher eventPublisher;
+  private final AuthFacade authFacade;
 
   @Override
   @Transactional
@@ -35,7 +37,9 @@ public class TaskServiceImpl implements TaskService {
     task.setCreated(LocalDateTime.now());
     task.setStatus(AssignStatus.ASSIGNED);
     task = taskRepository.save(task);
+
     log.info("preparing to send event");
+
     eventPublisher.publishEvent(
         TaskAssignedEvent.builder().taskId(task.getId()).userEmail(request.userEmail()).build());
     return TaskMapper.map(task);
@@ -52,6 +56,7 @@ public class TaskServiceImpl implements TaskService {
                   log.error("Task not found by provided id{} ", id);
                   return new TaskNotFoundException("Task not found");
                 });
+
     task.setDeleted(LocalDateTime.now());
     task = taskRepository.save(task);
     log.info("Successfully deleted task {}", task.getId());
@@ -80,6 +85,7 @@ public class TaskServiceImpl implements TaskService {
     task.setPriority(request.priority());
     task.setUpdated(LocalDateTime.now());
     task = taskRepository.save(task);
+
     log.info("Successfully updated task{} ", task.getId());
     return TaskMapper.map(task);
   }
@@ -95,5 +101,13 @@ public class TaskServiceImpl implements TaskService {
                   return new TaskNotFoundException("");
                 });
     return TaskMapper.map(task);
+  }
+
+  @Override
+  public List<TaskDto> getAssignedTasks() {
+    UUID currentUserId = authFacade.currentUserId();
+    List<TaskEntity> assignedTasks =
+        taskRepository.findAllByAssignedTo_IdAndDeletedIsNull(currentUserId);
+    return assignedTasks.stream().map(TaskMapper::map).toList();
   }
 }

@@ -1,6 +1,6 @@
 package com.example.taskifyapi.config;
 
-import com.example.taskifyapi.service.security.JwtService.UserDetailsServiceImp;
+import com.example.taskifyapi.service.security.UserDetailsServiceImp;
 import com.example.taskifyapi.service.security.filter.JwtAuthenticationFilter;
 import jakarta.annotation.Nonnull;
 import lombok.AllArgsConstructor;

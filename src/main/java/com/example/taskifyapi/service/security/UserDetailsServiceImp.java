@@ -1,7 +1,6 @@
-package com.example.taskifyapi.service.security.JwtService;
+package com.example.taskifyapi.service.security;
 
-import com.example.taskifyapi.repository.UserEntityRepository;
-import com.example.taskifyapi.service.security.SecurityUser;
+import com.example.taskifyapi.service.user.UserFetcher;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,13 +11,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserDetailsServiceImp implements UserDetailsService {
 
-  private final UserEntityRepository userRepository;
+  private final UserFetcher userFetcher;
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    return userRepository
-        .findUserEntityByEmailAndDeletedIsNull(username)
-        .map(SecurityUser::new)
-        .orElseThrow(() -> new UsernameNotFoundException("Username not found"));
+    return new SecurityUser(userFetcher.fetch(username));
   }
 }

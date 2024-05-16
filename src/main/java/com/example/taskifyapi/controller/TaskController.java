@@ -28,6 +28,11 @@ public class TaskController {
     return ResponseEntity.ok(taskService.getAll());
   }
 
+  @GetMapping("/getAssigned")
+  ResponseEntity<List<TaskDto>> getAssignedTasks() {
+    return ResponseEntity.ok(taskService.getAssignedTasks());
+  }
+
   @PutMapping("/updateBy/{id}")
   ResponseEntity<TaskDto> updateById(
       @PathVariable(name = "id") final UUID id, @RequestBody UpdateRequest request) {
