@@ -32,7 +32,7 @@ public class SecurityConfig {
         .authorizeHttpRequests(
             req ->
                 req.requestMatchers(
-                        "/Authentication/login/**", "/Authentication/register/**", "/Mar/Jan/**")
+                        "/Authentication/login/**", "/Authentication/register/**")
                     .permitAll()
                     .anyRequest()
                     .authenticated())
