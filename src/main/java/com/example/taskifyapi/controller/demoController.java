@@ -2,6 +2,7 @@ package com.example.taskifyapi.controller;
 
 import com.example.taskifyapi.service.security.AuthFacade;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
@@ -9,8 +10,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "demo")
 public class demoController {
   AuthFacade facade;
-  //    @GetMapping()
-  //    String username(@PathVariable String ov){
-  //        return ov + " debila";
-  //    }
+
+  @GetMapping
+  ResponseEntity<String> getUsername() {
+    return ResponseEntity.ok(facade.currentUserName());
+  }
 }
