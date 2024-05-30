@@ -41,7 +41,10 @@ public class TaskServiceImpl implements TaskService {
     log.info("preparing to send event");
 
     eventPublisher.publishEvent(
-        TaskAssignedEvent.builder().taskId(task.getId()).userEmail(request.assigneeEmail()).build());
+        TaskAssignedEvent.builder()
+            .taskId(task.getId())
+            .userEmail(request.assigneeEmail())
+            .build());
     return TaskMapper.map(task);
   }
 

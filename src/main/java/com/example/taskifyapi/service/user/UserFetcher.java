@@ -3,8 +3,6 @@ package com.example.taskifyapi.service.user;
 import com.example.taskifyapi.entity.UserEntity;
 import com.example.taskifyapi.exeptions.UserNotFoundException;
 import com.example.taskifyapi.repository.UserEntityRepository;
-
-import java.util.Hashtable;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
