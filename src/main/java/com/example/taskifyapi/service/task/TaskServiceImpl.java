@@ -29,7 +29,6 @@ public class TaskServiceImpl implements TaskService {
   private final AuthFacade authFacade;
 
   @Override
-  @Transactional
   public TaskDto addTask(TaskRequest request) {
     TaskEntity task = new TaskEntity();
     task.setTitle(request.title());
@@ -51,7 +50,6 @@ public class TaskServiceImpl implements TaskService {
   }
 
   @Override
-  @Transactional
   public void deleteById(final UUID id) {
     TaskEntity task =
         taskRepository
@@ -74,7 +72,6 @@ public class TaskServiceImpl implements TaskService {
   }
 
   @Override
-  @Transactional
   public TaskDto updateTask(final UUID id, UpdateRequest request) {
     TaskEntity task =
         taskRepository
@@ -112,7 +109,7 @@ public class TaskServiceImpl implements TaskService {
   public List<TaskDto> getAssignedTasks() {
     UUID currentUserId = authFacade.currentUserId();
     List<TaskEntity> assignedTasks =
-        taskRepository.findAllByAssignedTo_IdAndDeletedIsNull(currentUserId);
+        taskRepository.findAllByAssignedTo_IdAndStatusIsAndDeletedIsNull(currentUserId, AssignStatus.ASSIGNED);
     return assignedTasks.stream().map(TaskMapper::map).toList();
   }
 }

@@ -22,7 +22,6 @@ public class UserServiceImpl implements UserService {
   private final UserFetcher userFetcher;
 
   @Override
-  @Transactional
   public UserDto updateUser(UserRequest request, final UUID id) {
     UserEntity user = userFetcher.fetch(id);
     user.setFirstName(request.firstName());
@@ -48,7 +47,6 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  @Transactional
   public void deleteById(final UUID userId) {
     UserEntity user = userFetcher.fetch(userId);
     user.setAssignedTasks(null);

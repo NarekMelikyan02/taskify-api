@@ -4,6 +4,8 @@ import com.example.taskifyapi.entity.TaskEntity;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import com.example.taskifyapi.enumeration.AssignStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface TaskEntityRepository extends JpaRepository<TaskEntity, UUID> {
@@ -11,5 +13,5 @@ public interface TaskEntityRepository extends JpaRepository<TaskEntity, UUID> {
 
   List<TaskEntity> findAllByDeletedIsNull();
 
-  List<TaskEntity> findAllByAssignedTo_IdAndDeletedIsNull(UUID userId);
+  List<TaskEntity> findAllByAssignedTo_IdAndStatusIsAndDeletedIsNull(UUID userId, AssignStatus status);
 }
