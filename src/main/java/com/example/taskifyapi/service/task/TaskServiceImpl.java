@@ -5,6 +5,7 @@ import com.example.taskifyapi.dto.task.TaskRequest;
 import com.example.taskifyapi.dto.task.UpdateRequest;
 import com.example.taskifyapi.entity.TaskEntity;
 import com.example.taskifyapi.enumeration.AssignStatus;
+import com.example.taskifyapi.enumeration.ListenersEventType;
 import com.example.taskifyapi.exeptions.TaskNotFoundException;
 import com.example.taskifyapi.repository.TaskEntityRepository;
 import com.example.taskifyapi.service.event.model.TaskAssignedEvent;
@@ -44,6 +45,7 @@ public class TaskServiceImpl implements TaskService {
         TaskAssignedEvent.builder()
             .taskId(task.getId())
             .userEmail(request.assigneeEmail())
+            .eventType(ListenersEventType.TASK_ASSIGNED)
             .build());
     return TaskMapper.map(task);
   }

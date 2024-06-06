@@ -4,13 +4,15 @@ import com.example.taskifyapi.enumeration.UserGender;
 import com.example.taskifyapi.enumeration.UserRoles;
 import jakarta.persistence.*;
 import java.util.List;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "users")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserEntity extends BaseEntity {
   @Column(name = "first_name", nullable = false)
   private String firstName;
