@@ -1,9 +1,10 @@
 package com.example.taskifyapi;
 
-import com.example.taskifyapi.controller.AdminServiceTest;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
 
-class TaskifyApiApplicationTests extends AdminServiceTest {
+@SpringBootTest
+class TaskifyApiApplicationTests {
 
   @Test
   void contextLoads() {}
