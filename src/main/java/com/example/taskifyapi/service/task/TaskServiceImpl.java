@@ -17,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Slf4j
@@ -109,7 +108,8 @@ public class TaskServiceImpl implements TaskService {
   public List<TaskDto> getAssignedTasks() {
     UUID currentUserId = authFacade.currentUserId();
     List<TaskEntity> assignedTasks =
-        taskRepository.findAllByAssignedTo_IdAndStatusIsAndDeletedIsNull(currentUserId, AssignStatus.ASSIGNED);
+        taskRepository.findAllByAssignedTo_IdAndStatusIsAndDeletedIsNull(
+            currentUserId, AssignStatus.ASSIGNED);
     return assignedTasks.stream().map(TaskMapper::map).toList();
   }
 }
