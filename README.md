@@ -1,0 +1,1 @@
+This small project is my first step to web development. It's service where teachers can assign tasks to their students.I will update its functionality over time to be more specific as my skillset gorws.
