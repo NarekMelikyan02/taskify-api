@@ -1,7 +1,7 @@
 package com.example.taskifyapi.entity;
 
 import com.example.taskifyapi.enumeration.AssignStatus;
-import com.example.taskifyapi.enumeration.TaskPriority;
+import com.example.taskifyapi.enumeration.task.TaskPriority;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

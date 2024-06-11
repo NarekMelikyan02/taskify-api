@@ -110,6 +110,7 @@ public class TaskServiceImpl implements TaskService {
     List<TaskEntity> assignedTasks =
         taskRepository.findAllByAssignedTo_IdAndStatusIsAndDeletedIsNull(
             currentUserId, AssignStatus.ASSIGNED);
+    taskRepository.orderByTaskPriority(assignedTasks);
     return assignedTasks.stream().map(TaskMapper::map).toList();
   }
 }
