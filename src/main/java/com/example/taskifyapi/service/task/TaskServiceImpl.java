@@ -108,9 +108,8 @@ public class TaskServiceImpl implements TaskService {
   public List<TaskDto> getAssignedTasks() {
     UUID currentUserId = authFacade.currentUserId();
     List<TaskEntity> assignedTasks =
-        taskRepository.findAllByAssignedTo_IdAndStatusIsAndDeletedIsNull(
+        taskRepository.findAllByAssignedTo_IdAndStatusIsAndDeletedIsNullOrderByPriority(
             currentUserId, AssignStatus.ASSIGNED);
-    taskRepository.orderByTaskPriority(assignedTasks);
     return assignedTasks.stream().map(TaskMapper::map).toList();
   }
 }
