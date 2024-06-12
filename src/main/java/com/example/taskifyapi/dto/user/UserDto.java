@@ -1,8 +1,8 @@
 package com.example.taskifyapi.dto.user;
 
 import com.example.taskifyapi.dto.task.TaskDto;
-import com.example.taskifyapi.enumeration.UserGender;
-import com.example.taskifyapi.enumeration.UserRoles;
+import com.example.taskifyapi.enumeration.user.UserGender;
+import com.example.taskifyapi.enumeration.user.UserRoles;
 import java.util.List;
 import java.util.UUID;
 import lombok.Builder;
