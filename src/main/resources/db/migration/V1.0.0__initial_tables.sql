@@ -22,7 +22,7 @@ create table if not exists tasks
     deleted       timestamp with time zone          default current_timestamp,
     title         varchar(50)             not null,
     content       varchar(255)             not null,
-    task_priority varchar(10)             not null ,
+    task_priority smallint             not null ,
     status        varchar(10)               ,
     user_id       uuid,
     constraint fk_users foreign key (user_id) references users (id)
