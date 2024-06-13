@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "answers")
-public class Answers extends BaseEntity{
+public class TaskAnswerEntity extends BaseEntity{
 
     @Column(name = "answer", nullable = false)
     private String answer;

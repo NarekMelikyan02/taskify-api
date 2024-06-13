@@ -31,5 +31,5 @@ public class TaskEntity extends BaseEntity {
 
   @OneToOne
   @JoinColumn(name = "answer_id")
-  private Answers answer_id;
+  private TaskAnswerEntity answer_id;
 }
