@@ -8,11 +8,11 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "answers")
-public class Answers extends BaseEntity{
+public class Answers extends BaseEntity {
 
-    @Column(name = "answer", nullable = false)
-    private String answer;
+  @Column(name = "answer", nullable = false)
+  private String answer;
 
-    @OneToOne(mappedBy = "answer_id")
-    private TaskEntity task;
+  @OneToOne(mappedBy = "answer_id")
+  private TaskEntity task;
 }
