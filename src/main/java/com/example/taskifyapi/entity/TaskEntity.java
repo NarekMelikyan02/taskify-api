@@ -27,5 +27,9 @@ public class TaskEntity extends BaseEntity {
 
   @ManyToOne
   @JoinColumn(name = "user_id")
-  UserEntity assignedTo;
+  private UserEntity assignedTo;
+
+  @OneToOne
+  @JoinColumn(name = "answer_id")
+  private Answers answer_id;
 }
