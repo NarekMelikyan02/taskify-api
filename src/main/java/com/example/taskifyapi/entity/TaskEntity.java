@@ -9,7 +9,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "tasks")
+@Table(name = "tasks",uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"title","content"})
+})
 public class TaskEntity extends BaseEntity {
   @Column(name = "title", nullable = false)
   private String title;
@@ -31,5 +33,5 @@ public class TaskEntity extends BaseEntity {
 
   @OneToOne
   @JoinColumn(name = "answer_id")
-  private TaskAnswerEntity answer_id;
+  private TaskAnswerEntity answer;
 }

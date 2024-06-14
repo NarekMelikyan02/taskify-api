@@ -13,6 +13,6 @@ public class TaskAnswerEntity extends BaseEntity {
   @Column(name = "answer", nullable = false)
   private String answer;
 
-  @OneToOne(mappedBy = "answer_id")
+  @OneToOne(mappedBy = "answer")
   private TaskEntity task;
 }

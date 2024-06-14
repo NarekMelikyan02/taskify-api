@@ -25,5 +25,6 @@ create table if not exists tasks
     task_priority smallint             not null,
     status        varchar(10)        not null,
     user_id       uuid,
-    constraint fk_users foreign key (user_id) references users (id)
+    constraint fk_users foreign key (user_id) references users (id),
+    constraint uq_constraint unique(title,content)
 );

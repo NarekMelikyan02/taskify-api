@@ -9,7 +9,6 @@ public class TaskMapper {
         .id(taskEntity.getId())
         .title(taskEntity.getTitle())
         .content(taskEntity.getContent())
-        .taskPriority(taskEntity.getPriority())
         .taskStatus(taskEntity.getStatus())
         .build();
   }
