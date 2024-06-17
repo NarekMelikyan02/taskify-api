@@ -2,7 +2,6 @@ package com.example.taskifyapi.entity;
 
 import com.example.taskifyapi.enumeration.AssignStatus;
 import com.example.taskifyapi.enumeration.task.TaskPriority;
-import com.example.taskifyapi.service.event.listeners.entity_listener.TaskEntityListener;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,8 +11,7 @@ import lombok.Setter;
 @Setter
 @Table(
     name = "tasks",
-    uniqueConstraints = {@UniqueConstraint(columnNames = {"title", "content"})})
-@EntityListeners(TaskEntityListener.class)
+    uniqueConstraints = {@UniqueConstraint(columnNames = {"title", "content", "deleted"})})
 public class TaskEntity extends BaseEntity {
   @Column(name = "title", nullable = false)
   private String title;

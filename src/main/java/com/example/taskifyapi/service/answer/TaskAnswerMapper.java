@@ -1,4 +1,4 @@
-package com.example.taskifyapi.service.task.answer;
+package com.example.taskifyapi.service.answer;
 
 import com.example.taskifyapi.dto.task_answer.TaskAnswerDto;
 import com.example.taskifyapi.entity.TaskAnswerEntity;

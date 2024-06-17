@@ -2,7 +2,7 @@ package com.example.taskifyapi.controller;
 
 import com.example.taskifyapi.dto.task_answer.TaskAnswerDto;
 import com.example.taskifyapi.dto.task_answer.TaskAnswerRequest;
-import com.example.taskifyapi.service.task.answer.TaskAnswerService;
+import com.example.taskifyapi.service.answer.TaskAnswerService;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
