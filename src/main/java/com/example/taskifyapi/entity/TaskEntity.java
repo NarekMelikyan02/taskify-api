@@ -9,7 +9,9 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "tasks")
+@Table(
+    name = "tasks",
+    uniqueConstraints = {@UniqueConstraint(columnNames = {"title", "content", "deleted"})})
 public class TaskEntity extends BaseEntity {
   @Column(name = "title", nullable = false)
   private String title;
@@ -29,7 +31,7 @@ public class TaskEntity extends BaseEntity {
   @JoinColumn(name = "user_id")
   private UserEntity assignedTo;
 
-  @OneToOne
-  @JoinColumn(name = "answer_id")
-  private TaskAnswerEntity answer_id;
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "answer_id", referencedColumnName = "id")
+  private TaskAnswerEntity answer;
 }

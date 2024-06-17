@@ -1,13 +1,11 @@
 package com.example.taskifyapi.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UuidGenerator;
 
 @Getter
@@ -20,7 +18,8 @@ public abstract class BaseEntity {
   @Column(name = "id", nullable = false, unique = true)
   protected UUID id;
 
-  @Column(name = "created")
+  @CreationTimestamp
+  @Column(name = "created", nullable = false)
   protected LocalDateTime created;
 
   @Column(name = "updated")
