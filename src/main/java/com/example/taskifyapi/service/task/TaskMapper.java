@@ -8,7 +8,9 @@ public class TaskMapper {
     return TaskDto.builder()
         .id(taskEntity.getId())
         .title(taskEntity.getTitle())
+        .taskPriority(taskEntity.getPriority())
         .content(taskEntity.getContent())
+        .answer(taskEntity.getAnswer())
         .taskStatus(taskEntity.getStatus())
         .build();
   }

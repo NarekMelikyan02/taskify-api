@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface TaskEntityRepository extends JpaRepository<TaskEntity, UUID> {
   Optional<TaskEntity> findByIdAndDeletedIsNull(UUID id);
 
+  Optional<TaskEntity> findByTitleAndContentAndDeletedIsNull(String title, String content);
+
   List<TaskEntity> findAllByDeletedIsNull();
 
   List<TaskEntity> findAllByAssignedTo_IdAndStatusIsAndDeletedIsNullOrderByPriority(

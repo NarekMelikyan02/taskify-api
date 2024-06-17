@@ -1,4 +1,4 @@
-package com.example.taskifyapi.service.event.model;
+package com.example.taskifyapi.service.event.model.event_types;
 
 import com.example.taskifyapi.enumeration.ListenersEventType;
 import lombok.Getter;

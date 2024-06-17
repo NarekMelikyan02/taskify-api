@@ -1,10 +1,7 @@
 package com.example.taskifyapi.entity;
 
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.UUID;
 import lombok.Getter;
 import lombok.Setter;

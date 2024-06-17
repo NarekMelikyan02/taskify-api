@@ -1,5 +1,6 @@
 package com.example.taskifyapi.enumeration;
 
 public enum ListenersEventType {
-  TASK_ASSIGNED
+  TASK_ASSIGNED,
+  ANSWER_PUBLISHED
 }
