@@ -6,12 +6,11 @@ import jakarta.persistence.PreUpdate;
 
 public class TaskEntityListener {
 
-    @PrePersist
-    @PreUpdate
-    public void setDeletedOnAnswerEntity(TaskEntity task){
-        if(task.getAnswer()!=null && task.getDeleted() !=null){
-            task.getAnswer().setDeleted(task.getDeleted());
-        }
+  @PrePersist
+  @PreUpdate
+  public void setDeletedOnAnswerEntity(TaskEntity task) {
+    if (task.getAnswer() != null && task.getDeleted() != null) {
+      task.getAnswer().setDeleted(task.getDeleted());
     }
-
+  }
 }

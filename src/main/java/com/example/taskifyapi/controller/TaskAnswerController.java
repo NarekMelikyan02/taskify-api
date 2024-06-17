@@ -21,8 +21,7 @@ public class TaskAnswerController {
   }
 
   @PostMapping("/submit")
-  ResponseEntity<TaskAnswerDto> submitAnswer(@RequestBody TaskAnswerRequest request){
-      return ResponseEntity.ok(answerService.addAnswer(request));
+  ResponseEntity<TaskAnswerDto> submitAnswer(@RequestBody TaskAnswerRequest request) {
+    return ResponseEntity.ok(answerService.addAnswer(request));
   }
-
 }
