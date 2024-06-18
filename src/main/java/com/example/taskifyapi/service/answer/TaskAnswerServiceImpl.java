@@ -4,9 +4,13 @@ import com.example.taskifyapi.dto.task_answer.TaskAnswerDto;
 import com.example.taskifyapi.dto.task_answer.TaskAnswerRequest;
 import com.example.taskifyapi.entity.TaskAnswerEntity;
 import com.example.taskifyapi.enumeration.ListenersEventType;
+import com.example.taskifyapi.exeptions.AnswerNotFoundException;
 import com.example.taskifyapi.repository.TaskAnswerEntityRepository;
+import com.example.taskifyapi.service.event.model.AnswerDeletedEvent;
 import com.example.taskifyapi.service.event.model.AnswerPublishedEvent;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
@@ -41,5 +45,27 @@ public class TaskAnswerServiceImpl implements TaskAnswerService {
             .eventType(ListenersEventType.ANSWER_PUBLISHED)
             .build());
     return answerMapper.map(taskAnswer);
+  }
+
+  @Override
+  public void deleteAnswerById(UUID id) {
+    TaskAnswerEntity answerEntity =
+        answerRepository
+            .findById(id)
+            .orElseThrow(
+                () -> {
+                  log.error("Answer not found by provided Id: {}", id);
+                  return new AnswerNotFoundException("");
+                });
+
+    answerEntity.setDeleted(LocalDateTime.now());
+
+    eventPublisher.publishEvent(
+        AnswerDeletedEvent.builder()
+            .answerId(answerEntity.getId())
+            .eventType(ListenersEventType.ANSWER_DELETED)
+            .build());
+
+    answerRepository.save(answerEntity);
   }
 }

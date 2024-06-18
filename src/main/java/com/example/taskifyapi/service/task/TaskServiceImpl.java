@@ -9,7 +9,7 @@ import com.example.taskifyapi.enumeration.ListenersEventType;
 import com.example.taskifyapi.exeptions.TaskNotFoundException;
 import com.example.taskifyapi.repository.TaskEntityRepository;
 import com.example.taskifyapi.service.event.model.TaskAssignedEvent;
-import com.example.taskifyapi.service.event.model.event_types.TaskDeletedEvent;
+import com.example.taskifyapi.service.event.model.TaskDeletedEvent;
 import com.example.taskifyapi.service.security.AuthFacade;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -62,11 +62,14 @@ public class TaskServiceImpl implements TaskService {
 
     task.setDeleted(LocalDateTime.now());
 
-    eventPublisher.publishEvent(
-        TaskDeletedEvent.builder()
-            .deletedTask(task)
-            .eventType(ListenersEventType.TASK_DELETED)
-            .build());
+    if (task.getAnswer() != null) {
+      eventPublisher.publishEvent(
+          TaskDeletedEvent.builder()
+              .deletedTask(task)
+              .eventType(ListenersEventType.TASK_DELETED)
+              .build());
+    }
+
     task = taskRepository.save(task);
     log.info("Successfully deleted task {}", task.getId());
   }

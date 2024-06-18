@@ -16,4 +16,6 @@ public interface TaskEntityRepository extends JpaRepository<TaskEntity, UUID> {
 
   List<TaskEntity> findAllByAssignedTo_IdAndStatusIsAndDeletedIsNullOrderByPriority(
       UUID userId, AssignStatus status);
+
+  Optional<TaskEntity> findByAnswer_IdAndDeletedIsNull(UUID answerId);
 }
