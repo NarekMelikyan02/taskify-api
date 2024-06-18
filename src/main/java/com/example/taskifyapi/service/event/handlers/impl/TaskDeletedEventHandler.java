@@ -4,7 +4,7 @@ import com.example.taskifyapi.entity.TaskAnswerEntity;
 import com.example.taskifyapi.entity.TaskEntity;
 import com.example.taskifyapi.repository.TaskAnswerEntityRepository;
 import com.example.taskifyapi.service.event.handlers.EventHandler;
-import com.example.taskifyapi.service.event.model.event_types.TaskDeletedEvent;
+import com.example.taskifyapi.service.event.model.TaskDeletedEvent;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
